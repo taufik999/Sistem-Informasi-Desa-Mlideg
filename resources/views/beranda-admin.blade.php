@@ -39,13 +39,13 @@
         </div>
         <div class="card-body" style="padding: 1.5rem;">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
-                <div class="form-group">
+                <div class="form-group" style="display: flex; flex-direction: column; height: 100%;">
                     <label for="sambutan_nama" style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #334155;">Nama Kepala Desa</label>
-                    <input type="text" name="sambutan_nama" id="sambutan_nama" value="{{ old('sambutan_nama', $setting->sambutan_nama) }}" required style="width: 100%; padding: 0.8rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem;">
+                    <input type="text" name="sambutan_nama" id="sambutan_nama" value="{{ old('sambutan_nama', $setting->sambutan_nama) }}" required style="width: 100%; padding: 0.8rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem; margin-top: auto;">
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="display: flex; flex-direction: column; height: 100%;">
                     <label for="sambutan_jabatan" style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #334155;">Jabatan</label>
-                    <input type="text" name="sambutan_jabatan" id="sambutan_jabatan" value="{{ old('sambutan_jabatan', $setting->sambutan_jabatan) }}" required style="width: 100%; padding: 0.8rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem;">
+                    <input type="text" name="sambutan_jabatan" id="sambutan_jabatan" value="{{ old('sambutan_jabatan', $setting->sambutan_jabatan) }}" required style="width: 100%; padding: 0.8rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem; margin-top: auto;">
                 </div>
             </div>
 
