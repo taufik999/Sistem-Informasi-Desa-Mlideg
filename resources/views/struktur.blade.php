@@ -14,6 +14,20 @@
             --text-light: #64748b;
             --white: #ffffff;
             --bg-light: #f8fafc;
+            
+            /* Responsive Org Chart Sizing Variables */
+            --node-width: 260px;
+            --node-padding: 1.5rem;
+            --avatar-size: 70px;
+            --avatar-icon-size: 2rem;
+            --name-size: 1.1rem;
+            --role-size: 0.85rem;
+            --level-gap: 3rem;
+            --org-tree-gap: 2rem;
+            --bpd-gap: 30px;
+            --bpd-spacer: calc(var(--node-width) + var(--bpd-gap));
+            --fork-offset: 130px;
+            --line-top: 60px;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
         body { background-color: var(--bg-light); color: var(--text-dark); display: flex; flex-direction: column; min-height: 100vh; }
@@ -38,7 +52,7 @@
         .btn-grid:hover { background-color: #e2e8f0; color: var(--text-dark); }
 
         /* Header Section */
-        .detail-header { margin-top: 0; background-color: #0f172a; padding: 4rem 2rem; text-align: center; color: var(--white); }
+        .detail-header { margin-top: 0; background-color: #0f172a; padding: 8rem 2rem 4rem 2rem; text-align: center; color: var(--white); }
         .detail-header-title { font-size: 2.5rem; font-weight: 900; letter-spacing: 1px; margin-bottom: 1rem; }
         .breadcrumb { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.5rem; color: #94a3b8; font-size: 0.9rem; font-weight: 600; }
         .breadcrumb a { color: var(--primary); text-decoration: none; transition: color 0.3s; }
@@ -47,32 +61,38 @@
             .breadcrumb { font-size: 0.75rem; gap: 0.3rem; }
         }
 
+        .org-title-section { padding: 5rem 2rem 0 2rem; }
+        .org-title { text-align: center; color: #0f172a; font-size: 2rem; font-weight: 800; margin: 0; }
+
         /* Organization Chart Styles */
-        .org-container { padding: 5rem 2rem; flex-grow: 1; max-width: 100%; margin: 0 auto; width: 100%; overflow-x: auto; }
+        .org-container { padding: 3rem 2rem 5rem 2rem; flex-grow: 1; max-width: 100%; margin: 0 auto; width: 100%; overflow-x: auto; text-align: center; }
         
-        .org-tree { display: inline-flex; flex-direction: column; align-items: center; gap: 2rem; position: relative; padding: 2rem; width: max-content; margin: 0 auto; }
+        .org-tree { display: inline-flex; flex-direction: column; align-items: center; gap: var(--org-tree-gap); position: relative; padding: 2rem; width: max-content; margin: 0 auto; text-align: left; }
         
         /* Node Card */
         .org-node {
-            background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            width: 260px; position: relative; z-index: 10; border-top: 5px solid var(--primary); transition: transform 0.3s; cursor: pointer;
+            background: white; border-radius: 12px; padding: var(--node-padding); box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            width: var(--node-width); position: relative; z-index: 10; border-top: 5px solid var(--primary); transition: transform 0.3s; cursor: pointer;
         }
         .org-node:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
         .org-node.kades { border-color: #dc2626; background: #fef2f2; }
         .org-node.sekdes { border-color: #ea580c; background: #fff7ed; }
         .org-node.bpd { border-color: #475569; background: #f8fafc; }
         
-        .node-avatar { width: 70px; height: 70px; background: #e2e8f0; border-radius: 50%; margin: 0 auto 1rem auto; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #94a3b8; border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .node-name { font-weight: 800; font-size: 1.1rem; color: #0f172a; margin-bottom: 0.3rem; }
-        .node-role { font-size: 0.85rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; }
+        .node-avatar { width: var(--avatar-size); height: var(--avatar-size); background: #e2e8f0; border-radius: 50%; margin: 0 auto 1rem auto; display: flex; align-items: center; justify-content: center; font-size: var(--avatar-icon-size); color: #94a3b8; border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .node-name { font-weight: 800; font-size: var(--name-size); color: #0f172a; margin-bottom: 0.3rem; }
+        .node-role { font-size: var(--role-size); font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; }
 
         /* Tree Lines using Flex and Borders */
-        .level { display: flex; justify-content: center; gap: 3rem; position: relative; }
+        .level { display: flex; justify-content: center; gap: var(--level-gap); position: relative; }
         .level::before { content: ''; position: absolute; top: -2rem; left: 50%; width: 2px; height: 2rem; background: #cbd5e1; transform: translateX(-50%); }
         .level.top-level::before { display: none; }
         
+        .org-node::before { content: ''; position: absolute; top: -2rem; left: 50%; width: 2px; height: 2rem; background: #cbd5e1; transform: translateX(-50%); }
+        .level.top-level .org-node::before, .level:not([style*="margin-top"]) .org-node::before { display: none; }
+        
         /* Fork line for siblings */
-        .siblings-fork { position: absolute; top: -2rem; left: 130px; right: 130px; height: 2px; background: #cbd5e1; }
+        .siblings-fork { position: absolute; top: -2rem; left: var(--fork-offset); right: var(--fork-offset); height: 2px; background: #cbd5e1; }
         .line-down { width: 2px; height: 2rem; background: #cbd5e1; margin: 0 auto; }
 
         .btn-surat { background-color: var(--primary); color: white; border: none; padding: 0.65rem 1.4rem; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(249, 115, 22, 0.2); text-decoration: none; }
@@ -128,11 +148,50 @@
             .navbar { padding: 1rem 1.5rem; }
             .nav-actions .btn-lapor, .nav-actions .btn-surat { display: none; }
             .hamburger-btn { display: flex; align-items: center; justify-content: center; }
-            .detail-header { padding: 3rem 1rem; }
+            .detail-header { padding: 8rem 1rem 4rem 1rem; }
             .detail-header-title { font-size: 2rem; }
+            .org-title-section { padding: 3rem 1rem 0 1rem; }
+            .org-title { font-size: 1.5rem; }
             
             /* Give some space on mobile if tree is wide */
-            .org-tree { padding: 2rem 1rem; }
+            .org-container { padding: 2rem 1rem 3rem 1rem; }
+            .org-tree { padding: 0 1rem; }
+        }
+
+        @media (max-width: 768px) {
+            .org-title { font-size: 1.3rem; }
+            :root {
+                --node-width: 140px;
+                --node-padding: 1rem;
+                --avatar-size: 50px;
+                --avatar-icon-size: 1.5rem;
+                --name-size: 0.85rem;
+                --role-size: 0.65rem;
+                --level-gap: 1.2rem;
+                --org-tree-gap: 1.5rem;
+                --bpd-gap: 10px;
+                --fork-offset: 70px;
+                --line-top: 45px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .org-title { font-size: 1.1rem; }
+            :root {
+                --node-width: 105px;
+                --node-padding: 0.6rem;
+                --avatar-size: 40px;
+                --avatar-icon-size: 1.2rem;
+                --name-size: 0.75rem;
+                --role-size: 0.55rem;
+                --level-gap: 0.4rem;
+                --org-tree-gap: 1.5rem;
+                --bpd-gap: 5px;
+                --fork-offset: 52.5px; /* half of 105px */
+                --line-top: 35px;
+            }
+            .org-tree { padding: 0 0.5rem; }
+            .org-container { padding: 1.5rem 0.5rem 3rem 0.5rem; }
         }
 
         /* Modal Styles */
@@ -228,17 +287,21 @@
         </div>
     </header>
 
+    <!-- Title Section -->
+    <section class="org-title-section">
+        <h2 class="org-title">Struktur Organisasi Pemerintah Desa</h2>
+    </section>
+
     <!-- Org Chart Section -->
     <section class="org-container">
         <div class="org-tree">
-            <h2 style="text-align: center; color: #0f172a; margin-bottom: 4rem; font-size: 2rem; font-weight: 800;">Struktur Organisasi Pemerintah Desa</h2>
 
             <!-- Level 1: Kepala Desa & BPD -->
             <div class="level top-level" style="gap: 0; align-items: flex-start;">
                 
                 <!-- Left Spacer for BPD -->
-                <div style="width: 290px; height: 0; position: relative;">
-                    <div class="bpd-wrapper" style="position: absolute; top: 0; right: 30px; width: 260px; display: flex; flex-direction: column; gap: 2rem;">
+                <div style="width: var(--bpd-spacer); height: 0; position: relative;">
+                    <div class="bpd-wrapper" style="position: absolute; top: 0; right: var(--bpd-gap); width: var(--node-width); display: flex; flex-direction: column; gap: var(--org-tree-gap);">
                         @foreach($perangkat->where('level', 0) as $p)
                         <div class="org-node bpd" onclick="showProfile(this)" data-name="{{ $p->nama }}" data-role="{{ $p->jabatan }}" data-desc="{{ $p->deskripsi }}" data-icon="{{ $p->icon }}" data-ttl="{{ $p->ttl }}" data-pendidikan="{{ $p->pendidikan }}" data-nohp="{{ $p->no_hp }}">
                             <div class="node-avatar"><i class="fa-solid {{ $p->icon }}"></i></div>
@@ -249,13 +312,13 @@
                         
                         @if($perangkat->where('level', 0)->count() > 0 && $perangkat->where('level', 1)->count() > 0)
                         <!-- dashed line from right edge of BPD to left edge of Kades -->
-                        <div class="bpd-line" style="position: absolute; top: 50px; right: -30px; width: 30px; height: 2px; border-top: 2px dashed #cbd5e1; z-index: 0;"></div>
+                        <div class="bpd-line" style="position: absolute; top: var(--line-top); right: calc(var(--bpd-gap) * -1); width: var(--bpd-gap); height: 2px; border-top: 2px dashed #cbd5e1; z-index: 0;"></div>
                         @endif
                     </div>
                 </div>
 
                 <!-- Kepala Desa -->
-                <div style="display: flex; flex-direction: column; gap: 2rem; width: 260px; z-index: 10;">
+                <div style="display: flex; flex-direction: column; gap: var(--org-tree-gap); width: var(--node-width); z-index: 10;">
                     @foreach($perangkat->where('level', 1) as $p)
                     <div class="org-node kades" onclick="showProfile(this)" data-name="{{ $p->nama }}" data-role="{{ $p->jabatan }}" data-desc="{{ $p->deskripsi }}" data-icon="{{ $p->icon }}" data-ttl="{{ $p->ttl }}" data-pendidikan="{{ $p->pendidikan }}" data-nohp="{{ $p->no_hp }}">
                         <div class="node-avatar"><i class="fa-solid {{ $p->icon }}"></i></div>
@@ -266,7 +329,7 @@
                 </div>
                 
                 <!-- Right Spacer for Balance (Keeps Kades Centered) -->
-                <div style="width: 290px; height: 0;"></div>
+                <div style="width: var(--bpd-spacer); height: 0;"></div>
             </div>
             
             <div class="line-down"></div>
@@ -427,6 +490,19 @@
         document.getElementById('profileModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeModal();
+            }
+        });
+
+        // Center Org Chart on Kades Node for mobile view
+        window.addEventListener('load', function() {
+            const container = document.querySelector('.org-container');
+            const kades = document.querySelector('.org-node.kades');
+            if (container && kades) {
+                // Calculate scroll position to center the kades node
+                const scrollLeft = kades.offsetLeft - (container.clientWidth / 2) + (kades.clientWidth / 2);
+                if (scrollLeft > 0) {
+                    container.scrollLeft = scrollLeft;
+                }
             }
         });
     </script>
