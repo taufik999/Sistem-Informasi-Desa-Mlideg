@@ -48,9 +48,9 @@
         }
 
         /* Organization Chart Styles */
-        .org-container { padding: 5rem 2rem; flex-grow: 1; max-width: 1200px; margin: 0 auto; width: 100%; text-align: center; overflow-x: auto; }
+        .org-container { padding: 5rem 2rem; flex-grow: 1; max-width: 100%; margin: 0 auto; width: 100%; overflow-x: auto; }
         
-        .org-tree { display: flex; flex-direction: column; align-items: center; gap: 2rem; position: relative; padding: 2rem 0; }
+        .org-tree { display: inline-flex; flex-direction: column; align-items: center; gap: 2rem; position: relative; padding: 2rem; width: max-content; min-width: 100%; margin: 0 auto; }
         
         /* Node Card */
         .org-node {
@@ -77,8 +77,9 @@
         .line-down { width: 2px; height: 2rem; background: #cbd5e1; margin: 0 auto; }
 
         /* Layout specific adjustments */
-        .bpd-container { position: absolute; left: 0; top: 0; }
-        .bpd-line { position: absolute; top: 50px; left: 260px; width: calc(50vw - 390px); height: 2px; background: #cbd5e1; border-top: 2px dashed #cbd5e1; background: none; }
+        .bpd-container { position: absolute; left: 0; top: 0; width: 100%; pointer-events: none; }
+        .bpd-container .org-node { pointer-events: auto; }
+        .bpd-line { position: absolute; top: 50px; left: 260px; width: calc(50% - 260px); height: 2px; border-top: 2px dashed #cbd5e1; }
 
         .btn-surat { background-color: var(--primary); color: white; border: none; padding: 0.65rem 1.4rem; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(249, 115, 22, 0.2); text-decoration: none; }
         .btn-surat:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(249, 115, 22, 0.3); background-color: var(--primary-hover); }
@@ -136,39 +137,8 @@
             .detail-header { padding: 3rem 1rem; }
             .detail-header-title { font-size: 2rem; }
             
-            /* Org Chart Mobile - Vertical Stack */
-            .org-tree { gap: 2rem !important; }
-            .bpd-container { position: static; margin: 0; display: flex; flex-direction: column; gap: 2rem; align-items: center; width: 100%; }
-            .level { flex-direction: column; gap: 2rem; align-items: center; margin: 0 !important; width: 100%; }
-            
-            .org-node { margin-bottom: 0 !important; position: relative; width: 100%; max-width: 280px; }
-            
-            /* Draw vertical connecting line from every node */
-            .org-node::after {
-                content: '';
-                position: absolute;
-                bottom: -2rem;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 2px;
-                height: 2rem;
-                background: #cbd5e1;
-            }
-            
-            /* Dashed line for the last BPD node connecting to Kades */
-            .bpd-container .org-node:last-child::after {
-                border-left: 2px dashed #cbd5e1;
-                background: none;
-                width: 0;
-            }
-            
-            /* Hide the line from the very last node of the chart */
-            .level:last-of-type .org-node:last-child::after {
-                display: none;
-            }
-            
-            /* Hide all desktop structural lines */
-            .siblings-fork, .level::before, .line-down, .bpd-line { display: none !important; }
+            /* Give some space on mobile if tree is wide */
+            .org-tree { padding: 2rem 1rem; }
         }
 
         /* Modal Styles */
