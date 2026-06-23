@@ -203,16 +203,7 @@
                     <input type="text" name="no_hp" class="form-control" placeholder="08123456789">
                 </div>
 
-                <div class="form-group">
-                    <label>Class Icon (FontAwesome)</label>
-                    <input type="text" name="icon" class="form-control" value="fa-user" placeholder="Contoh: fa-user-tie">
-                    <small style="color: #64748b; margin-top: 5px; display: block;">Kosongkan jika ingin menggunakan icon bawaan.</small>
-                </div>
 
-                <div class="form-group">
-                    <label>Urutan (Untuk level yang sama)</label>
-                    <input type="number" name="urutan" class="form-control" value="0">
-                </div>
 
                 <div style="margin-top: 2rem;">
                     <button type="submit" class="btn-submit">Simpan Data</button>

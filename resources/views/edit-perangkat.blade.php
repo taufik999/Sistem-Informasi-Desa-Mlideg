@@ -138,16 +138,6 @@
                     <input type="text" name="no_hp" class="form-control" value="{{ $perangkat->no_hp }}">
                 </div>
 
-                <div class="form-group">
-                    <label>Class Icon (FontAwesome)</label>
-                    <input type="text" name="icon" class="form-control" value="{{ $perangkat->icon }}">
-                </div>
-
-                <div class="form-group">
-                    <label>Urutan (Untuk level yang sama)</label>
-                    <input type="number" name="urutan" class="form-control" value="{{ $perangkat->urutan }}">
-                </div>
-
                 <div style="margin-top: 2rem;">
                     <button type="submit" class="btn-submit">Simpan Perubahan</button>
                     <a href="/admin/perangkat" class="btn-cancel">Batal</a>
