@@ -358,6 +358,7 @@
             .features-container { gap: 1.5rem; }
         }
         @media (max-width: 992px) {
+            .hero { background-attachment: scroll; }
             .nav-links { display: none; }
             .navbar { padding: 1rem 1.5rem; }
             .hero-title { font-size: 3.2rem; }
