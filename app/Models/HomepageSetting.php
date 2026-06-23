@@ -12,6 +12,7 @@ class HomepageSetting extends Model
         'sambutan_nama',
         'sambutan_jabatan',
         'sambutan_judul',
-        'sambutan_konten'
+        'sambutan_konten',
+        'sambutan_foto'
     ];
 }

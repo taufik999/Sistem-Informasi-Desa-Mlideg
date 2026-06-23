@@ -535,7 +535,11 @@
         <div style="max-width: 1100px; margin: 0 auto; display: flex; gap: 4rem; align-items: center; flex-wrap: wrap;">
             <div style="flex: 1; min-width: 300px;">
                 <div style="background: #e2e8f0; width: 100%; aspect-ratio: 3/4; border-radius: 20px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
-                    <i class="fa-solid fa-user-tie" style="font-size: 8rem; color: #94a3b8;"></i>
+                    @if(isset($setting->sambutan_foto) && $setting->sambutan_foto)
+                        <img src="{{ asset('storage/' . $setting->sambutan_foto) }}" alt="Foto Kepala Desa" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
+                    @else
+                        <i class="fa-solid fa-user-tie" style="font-size: 8rem; color: #94a3b8;"></i>
+                    @endif
                     <div style="position: absolute; bottom: 0; width: 100%; background: rgba(15,23,42,0.8); color: white; text-align: center; padding: 1.5rem; backdrop-filter: blur(5px);">
                         <h4 style="margin: 0; font-size: 1.2rem; font-weight: 800;">{{ $setting->sambutan_nama ?? 'Erry Cahyono, S.H' }}</h4>
                         <p style="margin: 0; font-size: 0.9rem; opacity: 0.9; margin-top: 0.3rem;">{{ $setting->sambutan_jabatan ?? 'Kepala Desa Mlideg' }}</p>

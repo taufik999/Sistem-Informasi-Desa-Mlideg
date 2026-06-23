@@ -7,7 +7,7 @@
 @section('content')
 
 <div class="card" style="margin-bottom: 2rem;">
-    <form action="/admin/beranda/edit" method="POST">
+    <form action="/admin/beranda/edit" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="card-header" style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 1.5rem;">
@@ -47,6 +47,17 @@
                     <label for="sambutan_jabatan" style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #334155;">Jabatan</label>
                     <input type="text" name="sambutan_jabatan" id="sambutan_jabatan" value="{{ old('sambutan_jabatan', $setting->sambutan_jabatan) }}" required style="width: 100%; padding: 0.8rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem; margin-top: auto;">
                 </div>
+            </div>
+            
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+                <label for="sambutan_foto" style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #334155;">Foto Kepala Desa (Opsional)</label>
+                @if($setting->sambutan_foto)
+                    <div style="margin-bottom: 1rem; border: 1px dashed #cbd5e1; padding: 0.5rem; border-radius: 8px; display: inline-block;">
+                        <img src="{{ asset('storage/' . $setting->sambutan_foto) }}" alt="Preview Foto" style="height: 120px; object-fit: cover; border-radius: 4px;">
+                    </div>
+                @endif
+                <input type="file" name="sambutan_foto" id="sambutan_foto" accept="image/*" style="width: 100%; padding: 0.8rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem;">
+                <small style="color: #64748b; margin-top: 0.5rem; display: block;">Kosongkan jika tidak ingin mengubah foto saat ini. Format: JPG/PNG.</small>
             </div>
 
             <div class="form-group" style="margin-bottom: 1.5rem;">

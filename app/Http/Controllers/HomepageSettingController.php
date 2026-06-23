@@ -57,11 +57,20 @@ class HomepageSettingController extends Controller
             'sambutan_jabatan' => 'required|string',
             'sambutan_judul' => 'required|string',
             'sambutan_konten' => 'required|string',
+            'sambutan_foto' => 'nullable|image|max:2048'
         ]);
 
         $setting = HomepageSetting::first();
         
-        $data = $request->all();
+        $data = $request->except(['sambutan_foto']);
+        
+        if ($request->hasFile('sambutan_foto')) {
+            // Delete old photo if exists
+            if ($setting->sambutan_foto && \Storage::disk('public')->exists($setting->sambutan_foto)) {
+                \Storage::disk('public')->delete($setting->sambutan_foto);
+            }
+            $data['sambutan_foto'] = $request->file('sambutan_foto')->store('settings', 'public');
+        }
         // Gabungkan teks biasa dan teks highlight dengan tag HTML
         $data['hero_title'] = $request->hero_title_1 . ' <br> <span class="text-orange">' . $request->hero_title_highlight . '</span>';
         
