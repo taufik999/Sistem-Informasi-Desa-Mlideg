@@ -40,8 +40,8 @@
         /* Header Section */
         .detail-header { margin-top: 0; background-color: #0f172a; padding: 4rem 2rem; text-align: center; color: var(--white); }
         .detail-header-title { font-size: 2.5rem; font-weight: 900; letter-spacing: 1px; margin-bottom: 1rem; }
-        .breadcrumb { display: flex; align-items: center; justify-content: center; gap: 0.5rem; color: #94a3b8; font-size: 0.9rem; font-weight: 600; }
-        .breadcrumb a, .breadcrumb span { color: var(--primary); text-decoration: none; white-space: nowrap; }
+        .breadcrumb { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.5rem; color: #94a3b8; font-size: 0.9rem; font-weight: 600; }
+        .breadcrumb a { color: var(--primary); text-decoration: none; transition: color 0.3s; }
         .breadcrumb span { color: #94a3b8; }
         @media (max-width: 576px) {
             .breadcrumb { font-size: 0.75rem; gap: 0.3rem; }
@@ -50,7 +50,7 @@
         /* Organization Chart Styles */
         .org-container { padding: 5rem 2rem; flex-grow: 1; max-width: 100%; margin: 0 auto; width: 100%; overflow-x: auto; }
         
-        .org-tree { display: inline-flex; flex-direction: column; align-items: center; gap: 2rem; position: relative; padding: 2rem; width: max-content; min-width: 100%; margin: 0 auto; }
+        .org-tree { display: inline-flex; flex-direction: column; align-items: center; gap: 2rem; position: relative; padding: 2rem; width: max-content; margin: 0 auto; }
         
         /* Node Card */
         .org-node {
@@ -73,13 +73,7 @@
         
         /* Fork line for siblings */
         .siblings-fork { position: absolute; top: -2rem; left: 130px; right: 130px; height: 2px; background: #cbd5e1; }
-        
         .line-down { width: 2px; height: 2rem; background: #cbd5e1; margin: 0 auto; }
-
-        /* Layout specific adjustments */
-        .bpd-container { position: absolute; left: 0; top: 0; width: 100%; pointer-events: none; }
-        .bpd-container .org-node { pointer-events: auto; }
-        .bpd-line { position: absolute; top: 50px; left: 260px; width: calc(50% - 260px); height: 2px; border-top: 2px dashed #cbd5e1; }
 
         .btn-surat { background-color: var(--primary); color: white; border: none; padding: 0.65rem 1.4rem; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(249, 115, 22, 0.2); text-decoration: none; }
         .btn-surat:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(249, 115, 22, 0.3); background-color: var(--primary-hover); }
@@ -237,28 +231,42 @@
     <!-- Org Chart Section -->
     <section class="org-container">
         <div class="org-tree">
-            
-            <!-- BPD (Sidebar conceptual) -->
-            <div class="bpd-container">
-                @foreach($perangkat->where('level', 0) as $p)
-                <div class="org-node bpd" onclick="showProfile(this)" data-name="{{ $p->nama }}" data-role="{{ $p->jabatan }}" data-desc="{{ $p->deskripsi }}" data-icon="{{ $p->icon }}" data-ttl="{{ $p->ttl }}" data-pendidikan="{{ $p->pendidikan }}" data-nohp="{{ $p->no_hp }}">
-                    <div class="node-avatar"><i class="fa-solid {{ $p->icon }}"></i></div>
-                    <div class="node-name">{{ $p->nama }}</div>
-                    <div class="node-role">{{ $p->jabatan }}</div>
-                </div>
-                @endforeach
-                <div class="bpd-line"></div>
-            </div>
+            <h2 style="text-align: center; color: #0f172a; margin-bottom: 4rem; font-size: 2rem; font-weight: 800;">Struktur Organisasi Pemerintah Desa</h2>
 
-            <!-- Level 1: Kepala Desa -->
-            <div class="level top-level">
-                @foreach($perangkat->where('level', 1) as $p)
-                <div class="org-node kades" onclick="showProfile(this)" data-name="{{ $p->nama }}" data-role="{{ $p->jabatan }}" data-desc="{{ $p->deskripsi }}" data-icon="{{ $p->icon }}" data-ttl="{{ $p->ttl }}" data-pendidikan="{{ $p->pendidikan }}" data-nohp="{{ $p->no_hp }}">
-                    <div class="node-avatar"><i class="fa-solid {{ $p->icon }}"></i></div>
-                    <div class="node-name">{{ $p->nama }}</div>
-                    <div class="node-role">{{ $p->jabatan }}</div>
+            <!-- Level 1: Kepala Desa & BPD -->
+            <div class="level top-level" style="gap: 0; align-items: flex-start;">
+                
+                <!-- Left Spacer for BPD -->
+                <div style="width: 290px; height: 0; position: relative;">
+                    <div class="bpd-wrapper" style="position: absolute; top: 0; right: 30px; width: 260px; display: flex; flex-direction: column; gap: 2rem;">
+                        @foreach($perangkat->where('level', 0) as $p)
+                        <div class="org-node bpd" onclick="showProfile(this)" data-name="{{ $p->nama }}" data-role="{{ $p->jabatan }}" data-desc="{{ $p->deskripsi }}" data-icon="{{ $p->icon }}" data-ttl="{{ $p->ttl }}" data-pendidikan="{{ $p->pendidikan }}" data-nohp="{{ $p->no_hp }}">
+                            <div class="node-avatar"><i class="fa-solid {{ $p->icon }}"></i></div>
+                            <div class="node-name">{{ $p->nama }}</div>
+                            <div class="node-role" style="color: #475569;">{{ $p->jabatan }}</div>
+                        </div>
+                        @endforeach
+                        
+                        @if($perangkat->where('level', 0)->count() > 0 && $perangkat->where('level', 1)->count() > 0)
+                        <!-- dashed line from right edge of BPD to left edge of Kades -->
+                        <div class="bpd-line" style="position: absolute; top: 50px; right: -30px; width: 30px; height: 2px; border-top: 2px dashed #cbd5e1; z-index: 0;"></div>
+                        @endif
+                    </div>
                 </div>
-                @endforeach
+
+                <!-- Kepala Desa -->
+                <div style="display: flex; flex-direction: column; gap: 2rem; width: 260px; z-index: 10;">
+                    @foreach($perangkat->where('level', 1) as $p)
+                    <div class="org-node kades" onclick="showProfile(this)" data-name="{{ $p->nama }}" data-role="{{ $p->jabatan }}" data-desc="{{ $p->deskripsi }}" data-icon="{{ $p->icon }}" data-ttl="{{ $p->ttl }}" data-pendidikan="{{ $p->pendidikan }}" data-nohp="{{ $p->no_hp }}">
+                        <div class="node-avatar"><i class="fa-solid {{ $p->icon }}"></i></div>
+                        <div class="node-name">{{ $p->nama }}</div>
+                        <div class="node-role" style="color: #dc2626;">{{ $p->jabatan }}</div>
+                    </div>
+                    @endforeach
+                </div>
+                
+                <!-- Right Spacer for Balance (Keeps Kades Centered) -->
+                <div style="width: 290px; height: 0;"></div>
             </div>
             
             <div class="line-down"></div>
