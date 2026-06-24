@@ -480,73 +480,7 @@
                 </div>
             @endforeach
 
-            <!-- Dummy Data 1 -->
-            <div class="report-card s-menunggu" data-status="Menunggu Validasi">
-                <div class="r-icon i-infra"><i class="fa-solid fa-road-barrier"></i></div>
-                <div class="r-content">
-                    <div class="r-header">
-                        <h3 class="r-title">Lampu Jalan Padam di Pertigaan Balai</h3>
-                        <span class="r-date">12 Mar 2026</span>
-                    </div>
-                    <div class="r-meta">
-                        <span><i class="fa-regular fa-user"></i> Budi Santoso</span>
-                        <span><i class="fa-solid fa-map-pin"></i> Dusun Mlideg</span>
-                        <span><i class="fa-solid fa-tag"></i> Infrastruktur</span>
-                    </div>
-                    <div class="r-desc">
-                        "Sudah 3 hari ini lampu jalan PJU utama di pertigaan dekat balai desa mati total pak. Kalau malam sangat gelap dan berbahaya untuk pengguna motor, mohon segera ditangani."
-                    </div>
-                    <div class="r-actions">
-                        <span class="r-status bg-menunggu" style="display:none;"></span>
-                        <div class="r-actions-inner">
-                            <div>
-                                <span class="r-status bg-menunggu">Menunggu Validasi</span>
-                            </div>
-                            <div style="display: flex; gap: 0.5rem;">
-                                <div class="dropdown-menu">
-                                    <button class="btn-action btn-process" onclick="toggleDropdown(this)"><i class="fa-solid fa-bolt"></i> Tindaklanjuti <i class="fa-solid fa-chevron-down"></i></button>
-                                    <div class="dropdown-content">
-                                        <!-- using # for static dummy -->
-                                        <a href="#" onclick="alert('Ini adalah purwarupa data dummy. Pada laporan aslu, status akan terganti.')"><i class="fa-solid fa-spinner"></i> Tandai Sedang Diproses</a>
-                                        <a href="#" onclick="alert('Ini adalah purwarupa data dummy. Pada laporan aslu, status akan terganti.')"><i class="fa-solid fa-check-double"></i> Tandai Selesai</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Dummy Data 2 -->
-            <div class="report-card s-selesai" data-status="Selesai Ditangani">
-                <div class="r-icon i-bersih"><i class="fa-solid fa-leaf"></i></div>
-                <div class="r-content">
-                    <div class="r-header">
-                        <h3 class="r-title">Timbunan Sampah di Bantaran Sungai</h3>
-                        <span class="r-date">05 Mar 2026</span>
-                    </div>
-                    <div class="r-meta">
-                        <span><i class="fa-regular fa-user"></i> Siti Aminah</span>
-                        <span><i class="fa-solid fa-map-pin"></i> Dusun Ngrapah</span>
-                        <span><i class="fa-solid fa-tag"></i> Lingkungan</span>
-                    </div>
-                    <div class="r-desc">
-                        "Ada warga luar yang membuang sampah sembarangan di sungai dekat RT 02. Baunya menyengat. Mohon diadakan kerjabakti."
-                    </div>
-                    <div class="r-actions">
-                        <span class="r-status bg-selesai" style="display:none;"></span>
-                        <div class="r-actions-inner">
-                            <div>
-                                <span class="r-status bg-selesai">Selesai Ditangani</span>
-                            </div>
-                            <div style="display: flex; gap: 0.5rem;">
-                                <a href="#" class="btn-action" style="background-color: #64748b;"><i class="fa-regular fa-file-pdf"></i> Arsip</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
+
             @if(count($pengaduan) === 0)
              <div class="empty-state">
                 <i class="fa-regular fa-folder-open"></i>
