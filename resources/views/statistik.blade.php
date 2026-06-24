@@ -623,7 +623,7 @@
                     legend: { display: false }
                 },
                 scales: {
-                    y: { beginAtZero: true, grid: { borderDash: [5, 5] } },
+                    y: { beginAtZero: true, grid: { borderDash: [5, 5] }, ticks: { precision: 0, stepSize: 1 } },
                     x: { grid: { display: false } }
                 }
             }
@@ -670,7 +670,7 @@
                     legend: { display: false }
                 },
                 scales: {
-                    x: { beginAtZero: true, grid: { borderDash: [5, 5] } },
+                    x: { beginAtZero: true, grid: { borderDash: [5, 5] }, ticks: { precision: 0, stepSize: 1 } },
                     y: { grid: { display: false } }
                 }
             }
