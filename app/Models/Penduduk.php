@@ -8,6 +8,6 @@ class Penduduk extends Model
 {
     protected $fillable = [
         'nik', 'nkk', 'nama', 'jk', 'tempat_lahir', 'tgl_lahir', 'alamat', 'dusun', 
-        'kewarganegaraan', 'agama', 'status_kawin', 'pendidikan', 'pekerjaan', 'status'
+        'kewarganegaraan', 'agama', 'status_kawin', 'pendidikan', 'pekerjaan', 'no_telp', 'status'
     ];
 }

@@ -34,7 +34,7 @@ class PengaduanController extends Controller
         }
 
         $pengaduan = Pengaduan::where('nik', $nik)->whereNotNull('hp')->latest()->first();
-        $hp = $pengaduan ? $pengaduan->hp : '';
+        $hp = $penduduk->no_telp ?? ($pengaduan ? $pengaduan->hp : '');
 
         return response()->json([
             'success' => true,
