@@ -12,7 +12,7 @@ class StatistikController extends Controller
     public function index()
     {
         $totalPenduduk = Penduduk::count();
-        $totalKK = Penduduk::distinct('nkk')->count();
+        $totalKK = Penduduk::where('hubungan_keluarga', 'Kepala Keluarga')->count();
 
         // Gender
         $genderData = [

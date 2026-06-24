@@ -187,9 +187,9 @@
                     <i class="fa-solid fa-user"></i>
                 </div>
                 <div class="profile-title">
-                    <h3 id="vNama">Budi Santoso</h3>
-                    <p id="vNik">NIK: 3522101234560001</p>
-                    <span class="status-badge" id="vStatus">Penduduk Aktif (Tetap)</span>
+                    <h3 id="vNama">{{ $p->nama }}</h3>
+                    <p id="vNik">NIK: {{ $p->nik }}</p>
+                    <span class="status-badge" id="vStatus" style="{{ $p->status === 'Pindah Keluar' ? 'background-color: #fee2e2; color: #991b1b;' : '' }}">{{ $p->status }}</span>
                 </div>
             </div>
 
@@ -197,35 +197,39 @@
             <div class="data-grid">
                 <div class="data-item">
                     <div class="data-label">Nomor Kartu Keluarga (KK)</div>
-                    <div class="data-value" id="vKk">3522109876543210</div>
+                    <div class="data-value" id="vKk">{{ $p->nkk }}</div>
                 </div>
                 <div class="data-item">
                     <div class="data-label">Jenis Kelamin</div>
-                    <div class="data-value" id="vJk">Laki-laki</div>
+                    <div class="data-value" id="vJk">{{ $p->jk == 'L' ? 'Laki-laki' : 'Perempuan' }}</div>
                 </div>
                 <div class="data-item">
                     <div class="data-label">Tempat, Tanggal Lahir</div>
-                    <div class="data-value" id="vTTL">Bojonegoro, 15 Agustus 1985</div>
+                    <div class="data-value" id="vTTL">{{ $p->tempat_lahir }}, {{ \Carbon\Carbon::parse($p->tgl_lahir)->isoFormat('D MMMM Y') }}</div>
                 </div>
                 <div class="data-item">
                     <div class="data-label">Agama</div>
-                    <div class="data-value" id="vAgama">Islam</div>
+                    <div class="data-value" id="vAgama">{{ $p->agama }}</div>
                 </div>
                 <div class="data-item">
                     <div class="data-label">Pendidikan Terakhir</div>
-                    <div class="data-value" id="vPendidikan">Tamat SMA / Sederajat</div>
+                    <div class="data-value" id="vPendidikan">{{ $p->pendidikan }}</div>
                 </div>
                 <div class="data-item">
                     <div class="data-label">Pekerjaan</div>
-                    <div class="data-value" id="vPekerjaan">Petani</div>
+                    <div class="data-value" id="vPekerjaan">{{ $p->pekerjaan }}</div>
                 </div>
                 <div class="data-item">
                     <div class="data-label">Status Perkawinan</div>
-                    <div class="data-value" id="vStatusKawin">Kawin</div>
+                    <div class="data-value" id="vStatusKawin">{{ $p->status_kawin }}</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">Hubungan Keluarga</div>
+                    <div class="data-value" id="vHubunganKeluarga">{{ $p->hubungan_keluarga ?? 'Anggota Keluarga' }}</div>
                 </div>
                 <div class="data-item">
                     <div class="data-label">Kewarganegaraan</div>
-                    <div class="data-value" id="vWN">WNI</div>
+                    <div class="data-value" id="vWN">{{ $p->kewarganegaraan }}</div>
                 </div>
             </div>
 
@@ -233,7 +237,7 @@
             <div class="data-grid">
                 <div class="data-item" style="grid-column: span 2;">
                     <div class="data-label">Alamat Lengkap</div>
-                    <div class="data-value" id="vAlamat">Jl. Raya Mlideg RT 01 RW 01</div>
+                    <div class="data-value" id="vAlamat">{{ $p->alamat }}</div>
                 </div>
                 <div class="data-item">
                     <div class="data-label">Desa / Kelurahan</div>
@@ -241,7 +245,7 @@
                 </div>
                 <div class="data-item">
                     <div class="data-label">Dusun</div>
-                    <div class="data-value" id="vDusun">Dusun Mlideg</div>
+                    <div class="data-value" id="vDusun">{{ $p->dusun }}</div>
                 </div>
                 <div class="data-item">
                     <div class="data-label">Kecamatan</div>
@@ -260,35 +264,6 @@
             </div>
         </div>
     </main>
-
-    <script>
-        // Simple script to inject dummy data based on ID
-        const urlParams = window.location.pathname;
-        const id = urlParams.split('/').pop();
-        
-        if (id === '2') {
-            document.getElementById('vNama').innerText = "Siti Aminah, S.Pd";
-            document.getElementById('vNik').innerText = "NIK: 3522106543210002";
-            document.getElementById('vJk').innerText = "Perempuan";
-            document.getElementById('vTTL').innerText = "Tuban, 02 Mei 1990";
-            document.getElementById('vPendidikan').innerText = "S1 / Diploma IV";
-            document.getElementById('vPekerjaan').innerText = "Guru Sekolah";
-            document.getElementById('vDusun').innerText = "Dusun Ngrapah";
-        } else if (id === '3') {
-            document.getElementById('vNama').innerText = "Agus Setiawan";
-            document.getElementById('vNik').innerText = "NIK: 3522109876540003";
-            document.getElementById('vPekerjaan').innerText = "Wiraswasta";
-            document.getElementById('vStatus').innerText = "Pindah Keluar";
-            document.getElementById('vStatus').style.backgroundColor = "#fee2e2";
-            document.getElementById('vStatus').style.color = "#991b1b";
-        } else if (id === '4') {
-            document.getElementById('vNama').innerText = "Tri Wulandari";
-            document.getElementById('vNik').innerText = "NIK: 3522101122330004";
-            document.getElementById('vJk').innerText = "Perempuan";
-            document.getElementById('vPekerjaan').innerText = "Mengurus Rumah Tangga";
-            document.getElementById('vDusun').innerText = "Dusun Ngrapah";
-        }
-    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

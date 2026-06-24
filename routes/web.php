@@ -17,7 +17,7 @@ Route::get('/', function () {
     $latestBerita = Berita::where('status', 'Published')->orderBy('id', 'desc')->take(3)->get();
     
     $totalPenduduk = \App\Models\Penduduk::count();
-    $totalKK = \App\Models\Penduduk::distinct('nkk')->count('nkk');
+    $totalKK = \App\Models\Penduduk::where('hubungan_keluarga', 'Kepala Keluarga')->count();
     $wilayahDusun = 2; // Data dusun sementara hardcode 2
     $rukunTetangga = 16; // Data RT belum ada di skema database, menggunakan data default
     

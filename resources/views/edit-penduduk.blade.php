@@ -202,30 +202,30 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label class="form-label" for="nik">No. Induk Kependudukan (NIK) *</label>
-                        <input type="text" id="nik" name="nik" class="form-control" required value="3522101234560001" maxlength="16" minlength="16" pattern="\d{16}" title="NIK harus terdiri dari 16 digit angka">
+                        <input type="text" id="nik" name="nik" class="form-control" required value="{{ $p->nik }}" maxlength="16" minlength="16" pattern="\d{16}" title="NIK harus terdiri dari 16 digit angka">
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="nkk">No. Kartu Keluarga (KK) *</label>
-                        <input type="text" id="nkk" name="nkk" class="form-control" required value="3522109876543210">
+                        <input type="text" id="nkk" name="nkk" class="form-control" required value="{{ $p->nkk }}">
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="nama">Nama Lengkap *</label>
-                        <input type="text" id="nama" name="nama" class="form-control" required value="Budi Santoso">
+                        <input type="text" id="nama" name="nama" class="form-control" required value="{{ $p->nama }}">
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="jk">Jenis Kelamin *</label>
                         <select id="jk" name="jk" class="form-control" required>
-                            <option value="L" selected>Laki-laki</option>
-                            <option value="P">Perempuan</option>
+                            <option value="L" {{ $p->jk == 'L' ? 'selected' : '' }}>Laki-laki</option>
+                            <option value="P" {{ $p->jk == 'P' ? 'selected' : '' }}>Perempuan</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="tempat_lahir">Tempat Lahir *</label>
-                        <input type="text" id="tempat_lahir" name="tempat_lahir" class="form-control" required value="Bojonegoro">
+                        <input type="text" id="tempat_lahir" name="tempat_lahir" class="form-control" required value="{{ $p->tempat_lahir }}">
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="tgl_lahir">Tanggal Lahir *</label>
-                        <input type="date" id="tgl_lahir" name="tgl_lahir" class="form-control" required value="1985-08-15">
+                        <input type="date" id="tgl_lahir" name="tgl_lahir" class="form-control" required value="{{ $p->tgl_lahir }}">
                     </div>
                 </div>
 
@@ -233,21 +233,21 @@
                 <div class="form-grid">
                     <div class="form-group" style="grid-column: span 2;">
                         <label class="form-label" for="alamat">Alamat Jalan / Rt / Rw *</label>
-                        <input type="text" id="alamat" name="alamat" class="form-control" required value="Jl. Raya Mlideg RT 01 RW 01">
+                        <input type="text" id="alamat" name="alamat" class="form-control" required value="{{ $p->alamat }}">
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="dusun">Dusun (Wilayah) *</label>
                         <select id="dusun" name="dusun" class="form-control" required>
-                            @if($role === 'Super Admin' || $role === 'Admin Dusun Mlideg') <option value="Mlideg" selected>Dusun Mlideg</option> @endif
-                            @if($role === 'Super Admin' || $role === 'Admin Dusun Ngrapah') <option value="Ngrapah">Dusun Ngrapah</option> @endif
+                            @if($role === 'Super Admin' || $role === 'Admin Dusun Mlideg') <option value="Mlideg" {{ $p->dusun == 'Mlideg' ? 'selected' : '' }}>Dusun Mlideg</option> @endif
+                            @if($role === 'Super Admin' || $role === 'Admin Dusun Ngrapah') <option value="Ngrapah" {{ $p->dusun == 'Ngrapah' ? 'selected' : '' }}>Dusun Ngrapah</option> @endif
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="status_kependudukan">Status Kependudukan *</label>
-                        <select id="status_kependudukan" name="status_kependudukan" class="form-control">
-                            <option value="Aktif" selected>Penduduk Tetap (Aktif)</option>
-                            <option value="Pindah">Pindah Keluar</option>
-                            <option value="Meninggal">Meninggal Dunia</option>
+                        <label class="form-label" for="status">Status Kependudukan *</label>
+                        <select id="status" name="status" class="form-control">
+                            <option value="Aktif" {{ $p->status == 'Aktif' ? 'selected' : '' }}>Penduduk Tetap (Aktif)</option>
+                            <option value="Pindah" {{ $p->status == 'Pindah' ? 'selected' : '' }}>Pindah Keluar</option>
+                            <option value="Meninggal" {{ $p->status == 'Meninggal' ? 'selected' : '' }}>Meninggal Dunia</option>
                         </select>
                     </div>
                 </div>
@@ -257,22 +257,50 @@
                     <div class="form-group">
                         <label class="form-label" for="agama">Agama *</label>
                         <select id="agama" name="agama" class="form-control" required>
-                            <option value="Islam" selected>Islam</option>
-                            <option value="Kristen">Kristen</option>
+                            <option value="Islam" {{ $p->agama == 'Islam' ? 'selected' : '' }}>Islam</option>
+                            <option value="Kristen" {{ $p->agama == 'Kristen' ? 'selected' : '' }}>Kristen</option>
+                            <option value="Katolik" {{ $p->agama == 'Katolik' ? 'selected' : '' }}>Katolik</option>
+                            <option value="Hindu" {{ $p->agama == 'Hindu' ? 'selected' : '' }}>Hindu</option>
+                            <option value="Buddha" {{ $p->agama == 'Buddha' ? 'selected' : '' }}>Buddha</option>
+                            <option value="Konghucu" {{ $p->agama == 'Konghucu' ? 'selected' : '' }}>Konghucu</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="status_kawin">Status Perkawinan *</label>
                         <select id="status_kawin" name="status_kawin" class="form-control" required>
-                            <option value="Kawin" selected>Kawin</option>
-                            <option value="Belum Kawin">Belum Kawin</option>
+                            <option value="Belum Kawin" {{ $p->status_kawin == 'Belum Kawin' ? 'selected' : '' }}>Belum Kawin</option>
+                            <option value="Kawin" {{ $p->status_kawin == 'Kawin' ? 'selected' : '' }}>Kawin</option>
+                            <option value="Cerai Hidup" {{ $p->status_kawin == 'Cerai Hidup' ? 'selected' : '' }}>Cerai Hidup</option>
+                            <option value="Cerai Mati" {{ $p->status_kawin == 'Cerai Mati' ? 'selected' : '' }}>Cerai Mati</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="hubungan_keluarga">Hubungan Keluarga *</label>
+                        <select id="hubungan_keluarga" name="hubungan_keluarga" class="form-control" required>
+                            <option value="">-- Pilih Hubungan --</option>
+                            <option value="Kepala Keluarga" {{ ($p->hubungan_keluarga ?? '') == 'Kepala Keluarga' ? 'selected' : '' }}>Kepala Keluarga</option>
+                            <option value="Suami" {{ ($p->hubungan_keluarga ?? '') == 'Suami' ? 'selected' : '' }}>Suami</option>
+                            <option value="Istri" {{ ($p->hubungan_keluarga ?? '') == 'Istri' ? 'selected' : '' }}>Istri</option>
+                            <option value="Anak" {{ ($p->hubungan_keluarga ?? '') == 'Anak' ? 'selected' : '' }}>Anak</option>
+                            <option value="Menantu" {{ ($p->hubungan_keluarga ?? '') == 'Menantu' ? 'selected' : '' }}>Menantu</option>
+                            <option value="Cucu" {{ ($p->hubungan_keluarga ?? '') == 'Cucu' ? 'selected' : '' }}>Cucu</option>
+                            <option value="Orang Tua" {{ ($p->hubungan_keluarga ?? '') == 'Orang Tua' ? 'selected' : '' }}>Orang Tua</option>
+                            <option value="Mertua" {{ ($p->hubungan_keluarga ?? '') == 'Mertua' ? 'selected' : '' }}>Mertua</option>
+                            <option value="Famili Lain" {{ ($p->hubungan_keluarga ?? '') == 'Famili Lain' ? 'selected' : '' }}>Famili Lain</option>
+                            <option value="Pembantu" {{ ($p->hubungan_keluarga ?? '') == 'Pembantu' ? 'selected' : '' }}>Pembantu</option>
+                            <option value="Lainnya" {{ ($p->hubungan_keluarga ?? '') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="pendidikan">Pendidikan Terakhir *</label>
                         <select id="pendidikan" name="pendidikan" class="form-control" required>
-                            <option value="SMA" selected>Tamat SMA / Sederajat</option>
-                            <option value="S1/D4">S1 / Diploma IV</option>
+                            <option value="Tidak/Belum Sekolah" {{ $p->pendidikan == 'Tidak/Belum Sekolah' ? 'selected' : '' }}>Tidak / Belum Sekolah</option>
+                            <option value="SD" {{ $p->pendidikan == 'SD' ? 'selected' : '' }}>Tamat SD / Sederajat</option>
+                            <option value="SMP" {{ $p->pendidikan == 'SMP' ? 'selected' : '' }}>Tamat SMP / Sederajat</option>
+                            <option value="SMA" {{ $p->pendidikan == 'SMA' ? 'selected' : '' }}>Tamat SMA / Sederajat</option>
+                            <option value="D1/D2/D3" {{ $p->pendidikan == 'D1/D2/D3' ? 'selected' : '' }}>Diploma I/II/III</option>
+                            <option value="S1/D4" {{ $p->pendidikan == 'S1/D4' ? 'selected' : '' }}>S1 / Diploma IV</option>
+                            <option value="S2/S3" {{ $p->pendidikan == 'S2/S3' ? 'selected' : '' }}>S2 / S3</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -293,23 +321,7 @@
         </div>
     </main>
 
-    <script>
-        // Simple script to inject dummy data into the inputs based on ID for demo realism
-        const urlParams = window.location.pathname;
-        const id = urlParams.split('/')[2];
-        
-        if (id === '2') {
-            document.getElementById('nama').value = "Siti Aminah, S.Pd";
-            document.getElementById('nik').value = "3522106543210002";
-            document.getElementById('jk').value = "P";
-            document.getElementById('pekerjaan').value = "Guru Sekolah";
-            document.getElementById('pendidikan').value = "S1/D4";
-            document.getElementById('tgl_lahir').value = "1990-05-02";
-            if(document.getElementById('dusun').querySelector('option[value="Ngrapah"]')) {
-                document.getElementById('dusun').value = "Ngrapah";
-            }
-        }
-    </script>
+
 
 
     <script>

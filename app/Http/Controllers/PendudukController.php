@@ -99,7 +99,11 @@ class PendudukController extends Controller
             ->get();
             
         foreach ($kks as $kk) {
-            $kepala = Penduduk::where('nkk', $kk->nkk)->first();
+            $kepala = Penduduk::where('nkk', $kk->nkk)->where('hubungan_keluarga', 'Kepala Keluarga')->first();
+            if (!$kepala) {
+                // Fallback to first if no Kepala Keluarga is defined yet
+                $kepala = Penduduk::where('nkk', $kk->nkk)->first();
+            }
             $kk->kepala_keluarga = $kepala ? $kepala->nama : 'Tidak Diketahui';
             $kk->alamat = $kepala ? $kepala->alamat : '-';
         }
@@ -116,7 +120,10 @@ class PendudukController extends Controller
         if (!session()->has('role')) return redirect('/login');
         
         $anggota = Penduduk::where('nkk', $nkk)->get();
-        $kepala = $anggota->first();
+        $kepala = $anggota->where('hubungan_keluarga', 'Kepala Keluarga')->first();
+        if (!$kepala) {
+            $kepala = $anggota->first();
+        }
         
         return view('detail-kk', [
             'role' => session('role'), 
@@ -141,7 +148,10 @@ class PendudukController extends Controller
         $anggota = Penduduk::where('nkk', $nkk)->get();
         if ($anggota->isEmpty()) return redirect('/admin/kk')->with('error', 'Data KK tidak ditemukan!');
         
-        $kepala = $anggota->first();
+        $kepala = $anggota->where('hubungan_keluarga', 'Kepala Keluarga')->first();
+        if (!$kepala) {
+            $kepala = $anggota->first();
+        }
         return view('edit-kk', [
             'role' => session('role'),
             'user' => session('user'),

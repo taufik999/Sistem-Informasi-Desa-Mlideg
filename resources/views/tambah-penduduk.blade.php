@@ -278,6 +278,23 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label class="form-label" for="hubungan_keluarga">Hubungan Keluarga *</label>
+                        <select id="hubungan_keluarga" name="hubungan_keluarga" class="form-control" required>
+                            <option value="">-- Pilih Hubungan --</option>
+                            <option value="Kepala Keluarga">Kepala Keluarga</option>
+                            <option value="Suami">Suami</option>
+                            <option value="Istri">Istri</option>
+                            <option value="Anak">Anak</option>
+                            <option value="Menantu">Menantu</option>
+                            <option value="Cucu">Cucu</option>
+                            <option value="Orang Tua">Orang Tua</option>
+                            <option value="Mertua">Mertua</option>
+                            <option value="Famili Lain">Famili Lain</option>
+                            <option value="Pembantu">Pembantu</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label class="form-label" for="pendidikan">Pendidikan Terakhir *</label>
                         <select id="pendidikan" name="pendidikan" class="form-control" required>
                             <option value="">-- Pilih Pendidikan --</option>
