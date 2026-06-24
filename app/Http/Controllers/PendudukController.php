@@ -46,10 +46,11 @@ class PendudukController extends Controller
         if (!session()->has('role')) return redirect('/login');
         
         $request->validate([
-            'nik' => 'required|digits:16',
+            'nik' => 'required|digits:16|unique:penduduks,nik',
             'nkk' => 'required|digits:16'
         ], [
             'nik.digits' => 'NIK harus tepat 16 digit angka.',
+            'nik.unique' => 'NIK ini sudah terdaftar di sistem. Silakan periksa kembali.',
             'nkk.digits' => 'NKK harus tepat 16 digit angka.'
         ]);
         
@@ -77,10 +78,11 @@ class PendudukController extends Controller
         if (!session()->has('role')) return redirect('/login');
         
         $request->validate([
-            'nik' => 'required|digits:16',
+            'nik' => 'required|digits:16|unique:penduduks,nik,' . $id,
             'nkk' => 'required|digits:16'
         ], [
             'nik.digits' => 'NIK harus tepat 16 digit angka.',
+            'nik.unique' => 'NIK ini sudah digunakan oleh data penduduk lain.',
             'nkk.digits' => 'NKK harus tepat 16 digit angka.'
         ]);
         

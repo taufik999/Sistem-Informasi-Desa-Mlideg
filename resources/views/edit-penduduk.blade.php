@@ -362,6 +362,19 @@
         });
     </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if ($errors->has('nik'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal Menyimpan',
+                text: '{{ $errors->first("nik") }}',
+                confirmButtonColor: '#1d4ed8'
+            });
+        });
+    </script>
+    @endif
+
 </body>
 </html>
-
