@@ -140,6 +140,11 @@
                 <input type="number" class="form-input" id="order" name="order" min="1" placeholder="1">
             </div>
 
+            <div class="form-group">
+                <label for="weight">Bobot Kriteria (%)</label>
+                <input type="number" class="form-input" id="weight" name="weight" step="0.01" min="0" max="100" placeholder="0">
+            </div>
+
             <button type="submit" class="btn-primary-custom">
                 <i class="fa-solid fa-floppy-disk"></i> Simpan Kriteria
             </button>

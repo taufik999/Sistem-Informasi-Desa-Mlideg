@@ -409,9 +409,9 @@
                                 if (data.nama) {
                                     namaInput.value = data.nama;
                                 }
-                                if (data.hp) {
-                                    hpInput.value = data.hp;
-                                }
+                                // if (data.hp) {
+                                //     hpInput.value = data.hp;
+                                // }
                                 if (data.dusun) {
                                     for (let i = 0; i < dusunInput.options.length; i++) {
                                         if (dusunInput.options[i].value === data.dusun) {

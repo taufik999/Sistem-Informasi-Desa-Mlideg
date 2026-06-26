@@ -308,7 +308,7 @@
                         <input type="text" id="pekerjaan" name="pekerjaan" class="form-control" required value="{{ $p->pekerjaan ?? 'Petani' }}">
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="no_telp">No. Telepon / WhatsApp</label>
+                        <label class="form-label" for="no_telp">No. Telepon / WhatsApp (Opsional)</label>
                         <input type="text" id="no_telp" name="no_telp" class="form-control" placeholder="Contoh: 081234567890" value="{{ $p->no_telp }}">
                     </div>
                 </div>

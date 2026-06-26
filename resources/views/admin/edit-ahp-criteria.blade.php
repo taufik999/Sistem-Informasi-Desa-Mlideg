@@ -104,6 +104,15 @@
             </div>
 
             <div class="form-group">
+                <label for="weight">Bobot Kriteria (%)</label>
+                <input type="number" class="form-input" id="weight" name="weight"
+                       value="{{ old('weight', floatval($criterium->weight * 100)) }}" step="0.01" min="0" max="100" placeholder="0">
+                @error('weight')
+                    <div class="error-text">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="form-group">
                 <label>Status Kriteria</label>
                 <div class="switch-group">
                     <input class="switch-input" type="checkbox" id="is_active" name="is_active" value="1"

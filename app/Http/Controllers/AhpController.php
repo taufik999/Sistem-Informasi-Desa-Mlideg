@@ -90,8 +90,14 @@ class AhpController extends Controller
             'name' => 'required|string',
             'description' => 'nullable|string',
             'order' => 'nullable|integer',
-            'is_active' => 'nullable|boolean'
+            'is_active' => 'nullable|boolean',
+            'weight' => 'nullable|numeric|min:0|max:100'
         ]);
+
+        $weightToSave = null;
+        if ($request->has('weight') && $validated['weight'] !== null) {
+            $weightToSave = $validated['weight'] / 100;
+        }
 
         if ($request->has('id') && $request->id) {
             $criteria = AhpCriteria::find($request->id);
@@ -100,7 +106,8 @@ class AhpController extends Controller
                     'name' => $validated['name'],
                     'description' => $validated['description'],
                     'order' => $validated['order'] ?? $criteria->order,
-                    'is_active' => $request->has('is_active') ? true : false
+                    'is_active' => $request->has('is_active') ? true : false,
+                    'weight' => $weightToSave !== null ? $weightToSave : $criteria->weight
                 ]);
             }
             $message = 'Kriteria berhasil diperbarui!';
@@ -111,7 +118,7 @@ class AhpController extends Controller
                 'description' => $validated['description'] ?? '',
                 'order' => $order,
                 'is_active' => true,
-                'weight' => 0
+                'weight' => $weightToSave ?? 0
             ]);
             $message = 'Kriteria berhasil ditambahkan!';
         }
