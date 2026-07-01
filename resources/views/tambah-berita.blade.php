@@ -140,7 +140,7 @@
                 @csrf
                 <div class="form-group">
                     <label class="form-label" for="foto">Foto Sampul</label>
-                    <input type="file" id="foto" name="foto" class="form-control" accept="image/*" required>
+                    <input type="file" id="foto" name="foto" class="form-control" accept="image/*, .png, .jpg, .jpeg, .webp, .svg, .gif, .bmp, .ico" required>
                 </div>
 
                 <div class="form-group">

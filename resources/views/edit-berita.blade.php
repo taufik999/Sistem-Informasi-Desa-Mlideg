@@ -145,7 +145,7 @@
                             <img src="{{ asset('storage/' . $berita['foto']) }}" alt="Preview" style="max-height: 150px; border-radius: 4px;">
                         </div>
                     @endif
-                    <input type="file" id="foto" name="foto" class="form-control" accept="image/*">
+                    <input type="file" id="foto" name="foto" class="form-control" accept="image/*, .png, .jpg, .jpeg, .webp, .svg, .gif, .bmp, .ico">
                     <small style="color: #94a3b8; display: block; margin-top: 5px;">Biarkan kosong jika tidak ingin mengubah foto saat ini.</small>
                 </div>
 

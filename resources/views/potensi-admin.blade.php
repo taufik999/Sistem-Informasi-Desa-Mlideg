@@ -168,7 +168,7 @@
 
                 <div class="form-group">
                     <label>Unggah Gambar Ilustrasi</label>
-                    <input type="file" name="foto" class="form-control" accept="image/*" required style="padding: 0.6rem 1rem;">
+                    <input type="file" name="foto" class="form-control" accept="image/*, .png, .jpg, .jpeg, .webp, .svg, .gif, .bmp, .ico" required style="padding: 0.6rem 1rem;">
                 </div>
                 <button type="submit" class="btn-submit"><i class="fa-solid fa-save"></i> Simpan Potensi Desa</button>
             </form>

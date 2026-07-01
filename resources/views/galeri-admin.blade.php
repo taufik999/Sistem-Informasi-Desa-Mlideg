@@ -152,7 +152,7 @@
                 </div>
                 <div class="form-group">
                     <label>Unggah File Foto</label>
-                    <input type="file" name="foto" class="form-control" accept="image/*" required style="padding: 0.6rem 1rem;">
+                    <input type="file" name="foto" class="form-control" accept="image/*, .png, .jpg, .jpeg, .webp, .svg, .gif, .bmp, .ico" required style="padding: 0.6rem 1rem;">
                 </div>
                 <button type="submit" class="btn-submit"><i class="fa-solid fa-upload"></i> Unggah Foto</button>
             </form>
