@@ -213,3 +213,63 @@ Route::post('/admin/users', [UserController::class, 'store'])->name('users.store
 Route::get('/admin/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
 Route::post('/admin/users/{id}', [UserController::class, 'update'])->name('users.update');
 Route::get('/admin/users/{id}/delete', [UserController::class, 'destroy'])->name('users.destroy');
+
+Route::get('/fix-images', function() {
+    $count = 0;
+    
+    // Fix Galeri
+    foreach (\App\Models\Galeri::all() as $g) {
+        if (!empty($g->foto) && preg_match('/[ \(\)]/', $g->foto)) {
+            $baseName = basename($g->foto);
+            $dirName = dirname($g->foto);
+            $safeName = preg_replace('/[^A-Za-z0-9\-\.]/', '_', $baseName);
+            $newFoto = $dirName . '/' . $safeName;
+            
+            $oldPath = public_path('storage/' . $g->foto);
+            $newPath = public_path('storage/' . $newFoto);
+            if (file_exists($oldPath)) { rename($oldPath, $newPath); }
+            
+            $g->foto = $newFoto;
+            $g->save();
+            $count++;
+        }
+    }
+    
+    // Fix Potensi
+    foreach (\App\Models\Potensi::all() as $p) {
+        if (!empty($p->foto) && preg_match('/[ \(\)]/', $p->foto)) {
+            $baseName = basename($p->foto);
+            $dirName = dirname($p->foto);
+            $safeName = preg_replace('/[^A-Za-z0-9\-\.]/', '_', $baseName);
+            $newFoto = $dirName . '/' . $safeName;
+            
+            $oldPath = public_path('storage/' . $p->foto);
+            $newPath = public_path('storage/' . $newFoto);
+            if (file_exists($oldPath)) { rename($oldPath, $newPath); }
+            
+            $p->foto = $newFoto;
+            $p->save();
+            $count++;
+        }
+    }
+    
+    // Fix Berita
+    foreach (\App\Models\Berita::all() as $b) {
+        if (!empty($b->foto) && preg_match('/[ \(\)]/', $b->foto)) {
+            $baseName = basename($b->foto);
+            $dirName = dirname($b->foto);
+            $safeName = preg_replace('/[^A-Za-z0-9\-\.]/', '_', $baseName);
+            $newFoto = $dirName . '/' . $safeName;
+            
+            $oldPath = public_path('storage/' . $b->foto);
+            $newPath = public_path('storage/' . $newFoto);
+            if (file_exists($oldPath)) { rename($oldPath, $newPath); }
+            
+            $b->foto = $newFoto;
+            $b->save();
+            $count++;
+        }
+    }
+    
+    return "Berhasil memperbaiki $count gambar yang rusak namanya. Silakan kembali ke halaman web Anda.";
+});
