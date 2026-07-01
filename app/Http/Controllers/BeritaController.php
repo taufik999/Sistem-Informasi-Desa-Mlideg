@@ -47,7 +47,8 @@ class BeritaController extends Controller
         $fotoPath = null;
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
-            $filename = time() . '_' . $file->getClientOriginalName();
+            $safeName = preg_replace('/[^A-Za-z0-9\-\.]/', '_', $file->getClientOriginalName());
+            $filename = time() . '_' . $safeName;
             $file->move(public_path('storage/berita'), $filename);
             $fotoPath = 'berita/' . $filename;
         }
@@ -93,7 +94,8 @@ class BeritaController extends Controller
 
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
-            $filename = time() . '_' . $file->getClientOriginalName();
+            $safeName = preg_replace('/[^A-Za-z0-9\-\.]/', '_', $file->getClientOriginalName());
+            $filename = time() . '_' . $safeName;
             $file->move(public_path('storage/berita'), $filename);
             $data['foto'] = 'berita/' . $filename;
         }

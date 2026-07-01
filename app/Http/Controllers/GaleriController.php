@@ -27,7 +27,8 @@ class GaleriController extends Controller
         
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
-            $filename = time() . '_' . $file->getClientOriginalName();
+            $safeName = preg_replace('/[^A-Za-z0-9\-\.]/', '_', $file->getClientOriginalName());
+            $filename = time() . '_' . $safeName;
             $file->move(public_path('storage/galeri'), $filename);
             $fotoPath = 'galeri/' . $filename;
             

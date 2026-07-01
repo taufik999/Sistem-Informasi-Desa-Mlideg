@@ -28,7 +28,8 @@ class PotensiController extends Controller
         $fotoPath = '';
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
-            $filename = time() . '_' . $file->getClientOriginalName();
+            $safeName = preg_replace('/[^A-Za-z0-9\-\.]/', '_', $file->getClientOriginalName());
+            $filename = time() . '_' . $safeName;
             $file->move(public_path('storage/potensi'), $filename);
             $fotoPath = 'potensi/' . $filename;
         }
